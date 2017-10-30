@@ -1,4 +1,5 @@
 import { firebasePw } from './secrets'
+import * as firebase from 'firebase';
 
 var config = {
     apiKey: firebasePw,
@@ -8,6 +9,6 @@ var config = {
     storageBucket: "",
     messagingSenderId: "53494236560"
   };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  export default firebase
+export default firebase
