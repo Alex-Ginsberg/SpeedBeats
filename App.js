@@ -14,13 +14,17 @@ import {
 } from 'react-native';
 import firebase from './firebase'
 import { Col, Row, Grid } from "react-native-easy-grid";
+import Sound from 'react-native-sound'
+Sound.setCategory('Playback');
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+
+// let sound = new Sound('snare.mp3', Sound.MAIN_BUNDLE, (error) => {
+//   if (error) {
+//       console.log('failed to load the sound', error);
+//   } else {
+//       sound.play(); // have to put the call to play() in the onload callback
+//   }
+// });
 
 export default class App extends Component {
   render() {
@@ -28,19 +32,31 @@ export default class App extends Component {
       <View style={styles.container}>
         <Grid>
           <Col>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('snare.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('bass.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('clap.mp3')}></TouchableOpacity></Row>
           </Col>
           <Col>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('cowbell.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('highhat.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('rimshot.mp3')}></TouchableOpacity></Row>
           </Col>
         </Grid>
       </View>
     );
   }
+}
+
+// Takes in a fileName as a string, corresponding to the mp3 file that should be played
+function makeSound(file) {
+  let sound = new Sound(file, Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+        console.log('failed to load the sound', error);
+    } else {
+        sound.play(); // have to put the call to play() in the onload callback
+    }
+  });
+  return sound
 }
 
 const styles = StyleSheet.create({
