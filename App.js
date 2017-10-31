@@ -9,9 +9,11 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
 import firebase from './firebase'
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,19 +22,22 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Grid>
+          <Col>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+          </Col>
+          <Col>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt}></TouchableOpacity></Row>
+          </Col>
+        </Grid>
       </View>
     );
   }
@@ -55,4 +60,9 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  butt: {
+    backgroundColor: 'red',
+    height:50,
+    width:50,
+ }
 });
