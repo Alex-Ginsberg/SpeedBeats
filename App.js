@@ -27,19 +27,37 @@ Sound.setCategory('Playback');
 // });
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      beatSet: []
+    }
+  }
+
+  componentDidMount() {
+    const firstBeats = [makeSound('snare.mp3'), 
+                        makeSound('bass.mp3'),
+                        makeSound('clap.mp3'),
+                        makeSound('cowbell.mp3'),
+                        makeSound('highhat.mp3'),
+                        makeSound('rimshot.mp3')]
+    this.setState({beatSet: firstBeats})
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
         <Grid>
           <Col>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('snare.mp3')}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('bass.mp3')}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('clap.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[0].play()}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[1].play()}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[2].play()}></TouchableOpacity></Row>
           </Col>
           <Col>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('cowbell.mp3')}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('highhat.mp3')}></TouchableOpacity></Row>
-            <Row><TouchableOpacity style={styles.butt} onPress={() => makeSound('rimshot.mp3')}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[3].play()}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[4].play()}></TouchableOpacity></Row>
+            <Row><TouchableOpacity style={styles.butt} onPress={() => this.state.beatSet[5].play()}></TouchableOpacity></Row>
           </Col>
         </Grid>
       </View>
@@ -52,9 +70,10 @@ function makeSound(file) {
   let sound = new Sound(file, Sound.MAIN_BUNDLE, (error) => {
     if (error) {
         console.log('failed to load the sound', error);
-    } else {
-        sound.play(); // have to put the call to play() in the onload callback
-    }
+    } 
+    // else {
+    //     sound.play(); // have to put the call to play() in the onload callback
+    // }
   });
   return sound
 }
